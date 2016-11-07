@@ -1,0 +1,6 @@
+c:\users\iykef\onedrive\documents\visual studio 2015\Projects\Bubble Sort\Bubble Sort\bin\Debug\Bubble Sort.exe.config
+c:\users\iykef\onedrive\documents\visual studio 2015\Projects\Bubble Sort\Bubble Sort\bin\Debug\Bubble Sort.exe
+c:\users\iykef\onedrive\documents\visual studio 2015\Projects\Bubble Sort\Bubble Sort\bin\Debug\Bubble Sort.pdb
+c:\users\iykef\onedrive\documents\visual studio 2015\Projects\Bubble Sort\Bubble Sort\obj\Debug\Bubble Sort.csprojResolveAssemblyReference.cache
+c:\users\iykef\onedrive\documents\visual studio 2015\Projects\Bubble Sort\Bubble Sort\obj\Debug\Bubble Sort.exe
+c:\users\iykef\onedrive\documents\visual studio 2015\Projects\Bubble Sort\Bubble Sort\obj\Debug\Bubble Sort.pdb

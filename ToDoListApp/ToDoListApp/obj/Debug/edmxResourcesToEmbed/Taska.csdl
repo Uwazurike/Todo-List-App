@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaskaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Chore" Relationship="Self.FK_Chores_Category" FromRole="Category" ToRole="Chores" />
+  </EntityType>
+  <EntityType Name="Chore">
+    <Key>
+      <PropertyRef Name="TaskID" />
+    </Key>
+    <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="TaskDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="TaskCategory" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Chores_Category" FromRole="Chores" ToRole="Category" />
+    <NavigationProperty Name="TaskRecords" Relationship="Self.FK_TaskRecords_Chores" FromRole="Chores" ToRole="TaskRecords" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TaskRecord">
+    <Key>
+      <PropertyRef Name="RecordID" />
+    </Key>
+    <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Chore" Relationship="Self.FK_TaskRecords_Chores" FromRole="TaskRecords" ToRole="Chores" />
+  </EntityType>
+  <Association Name="FK_Chores_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Chores" Type="Self.Chore" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Chores">
+        <PropertyRef Name="TaskID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskRecords_Chores">
+    <End Role="Chores" Type="Self.Chore" Multiplicity="1" />
+    <End Role="TaskRecords" Type="Self.TaskRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chores">
+        <PropertyRef Name="TaskID" />
+      </Principal>
+      <Dependent Role="TaskRecords">
+        <PropertyRef Name="TaskID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TaskaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Chores" EntityType="Self.Chore" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TaskRecords" EntityType="Self.TaskRecord" />
+    <AssociationSet Name="FK_Chores_Category" Association="Self.FK_Chores_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Chores" EntitySet="Chores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskRecords_Chores" Association="Self.FK_TaskRecords_Chores">
+      <End Role="Chores" EntitySet="Chores" />
+      <End Role="TaskRecords" EntitySet="TaskRecords" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
